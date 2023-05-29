@@ -1,0 +1,48 @@
+[tool.robotidy]
+verbose = true
+color = true
+# outputdir = "logs" # Use this option to override file destination path.
+# log = "log"
+# report = "report"
+# output = "output"
+# A regular expression that matches files and directories that should be excluded on recursive searches. An empty value means no paths are excluded. Use forward slashes for directories on all platforms.
+# exclude = ""
+language = "en"
+spacecount = 2 # The number of spaces between cells
+continuation-indent = 4 # The number of spaces to be used as separator after ... (line continuation) token
+indent = 4 # The number of spaces to be used as indentation
+separator = "space" # [space|tab] Token separator to use in the outputs:
+line-length = 120 # Max allowed characters per line
+lineseparator = "unix" # [native|windows|unix|auto]  Line separator to use in the outputs:
+startline = 10 # Limit robotidy only to selected area. If --endline is not provided, format text only at --startline. Line numbers start from 1.
+endline = 20 # Limit robotidy only to selected area. Line numbers start from 1.
+
+overwrite = false # true = Write changes back to file
+diff = true # true = Output diff of each processed file
+check = true # true = Don't overwrite files and just return status. Return code 0 means nothing would change. Return code 1 means that at least 1 file would change. Any internal error will overwrite this status.
+force-order = false # Transform files using transformers in order provided in cli.
+# TRANSFORMER_NAME  Transform files from [PATH(S)] with given transformer
+transform = [
+   "DiscardEmptySections:allow_only_comments=True",
+   "SplitTooLongLine"
+]
+# TRANSFORMER_NAME:PARAM=VALUE  Configure transformers
+configure = [
+    "SplitTooLongLine:split_on_every_arg=False"
+]
+
+skip-gitignore = true # Skip .gitignore files and do not ignore files listed inside.
+skip-documentation = true # Skip formatting of documentation
+skip-return-values = false # Skip formatting of return values
+# skip-keyword-call = "" # TEXT  Keyword call name that should not be formatted
+# skip-keyword-call-pattern = "" # TEXT  Keyword call name pattern that should not be formatted
+skip-settings = false # Skip formatting of settings
+skip-arguments = false # Skip formatting of arguments
+skip-setup = false # Skip formatting of setup
+skip-teardown = false # Skip formatting of teardown
+skip-timeout = false # Skip formatting of timeout
+skip-template = false # Skip formatting of template
+skip-return = false # Skip formatting of return statement
+skip-tags = false # Skip formatting of tags
+skip-comments = false # Skip formatting of comments
+skip-block-comments = false # Skip formatting of block comments

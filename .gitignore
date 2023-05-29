@@ -11,6 +11,7 @@
 !/requirements*
 !/.coveragerc
 !/pyproject.toml
+!/robot.toml
 
 ################################################################
 # PROJECT FILES
