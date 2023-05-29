@@ -14,6 +14,7 @@ lark>=1.1.5
 lark-parser[regex]>=0.12.0
 numpy>=1.24.3
 lorem>=0.1.1
+anyio>=3.7.0
 coverage[toml]>=7.2.6
 pytest>=7.3.1
 pytest-cov>=4.1.0
