@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  version: x.y.z
+  title: Schemata for test config
+  description: |-
+    Schemata for configuration of tests.
+servers:
+  - url: "."
+paths: {}
+definitions:
+    FileString: &file_string
+      description: Data type for a string to be the base name of a file.
+      type: string
+      pattern: '^[^\\\/]*\.[^\\\/]+$'
+    PathToFileString: &path_to_file_string
+      description: Data type for a string to be a path to a file.
+      type: string
+      pattern: '^[^\\\/]+([\\\/][^\\\/]+)*\.[^\\\/]+$'
+    PathToDirString: &path_to_dir_string
+      description: Data type for a string to be a path to a directory.
+      type: string
+      pattern: '^[^\\\/]+([\\\/][^\\\/]+)*$'
+    PythonImportString: &python_import_string
+      description: Data type for a string to constitute an import 'path' in python.
+      type: string
+      pattern: '^[\w\_]+(\.[\w\_]+)*$'
+components:
+  schemas:
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Structure of config file
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ProgrammeConfig:
+      description: |-
+        Configuration for programme.
+      type: object
+      required:
+        - paths
+        - grammars
+      properties:
+        paths:
+          $ref: "#/components/schemas/ProgrammePaths"
+        grammars:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProgrammeAssetGrammar"
+      additionalProperties: false
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # programme paths
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ProgrammePaths:
+      description: |-
+        Paths for setup.
+      type: object
+      required:
+        - root
+        - logging
+      properties:
+        root:
+          <<: *path_to_file_string
+          description: Path to current package.
+          default: ''
+        logging:
+          <<: *path_to_file_string
+          description: Path to file for test logs.
+      additionalProperties: false
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # programme asset grammar
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ProgrammeAssetGrammar:
+      description: |-
+        Information about a grammar asset.
+      type: object
+      required:
+        - label
+        - path
+      properties:
+        label:
+          description: label of grammar asset
+          $ref: "#/components/schemas/EnumGrammarLabel"
+        path:
+          <<: *path_to_file_string
+          description: Path to grammar for formal language.
+      additionalProperties: false
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # enum for names of grammar assets
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    EnumGrammarLabel:
+      description: |-
+        Enumeration of possible options for grammar assets.
+      type: string
+      enum:
+        - 'FORMAL-LANGUAGE'
+      default: 'FORMAL-LANGUAGE'
