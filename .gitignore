@@ -1,0 +1,67 @@
+*
+!/.gitignore
+
+################################################################
+# MAIN FOLDER
+################################################################
+
+!/README.md
+!/LICENCE
+!/justfile
+!/requirements*
+!/.coveragerc
+!/pyproject.toml
+
+################################################################
+# PROJECT FILES
+################################################################
+
+!/src
+!/src/**/
+!/src/**/*.py
+!/src/*/models/*-schema.yaml
+!/src/*/assets
+!/src/*/assets/*.lark
+
+!/examples
+!/examples/data/
+!/examples/data/*.lark
+!/examples/data/*.txt
+!/examples/*.py
+!/examples/README.md
+
+!/documentation
+!/documentation/**/
+!/documentation/**/*.md
+
+!/tests
+!/tests/integration/
+!/tests/integration/**/*.robot
+!/tests/integration/**/*.resource
+!/tests/**/
+!/tests/**/*.py
+
+!/dist
+!/dist/VERSION
+
+################################################################
+# AUXLIARY
+################################################################
+
+/logs
+
+################################################################
+# ARTEFACTS
+################################################################
+
+/**/__pycache__
+/**/.pytest_cache
+/**/.DS_Store
+/**/__archive__*
+/**/.vscode
+
+################################################################
+# Git Keep
+################################################################
+
+!/**/.gitkeep
