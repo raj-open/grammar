@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  version: x.y.z
-  title: Schemata for test config
+  version: 0.0.0
+  title: Configuration
   description: |-
-    Schemata for configuration of tests.
+    Schemata for configuration of programme, assets, grammars.
 servers:
   - url: "."
 paths: {}

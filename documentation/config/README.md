@@ -1,4 +1,4 @@
-# Documentation for Schemata for test config
+# Documentation for Configuration
 
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
