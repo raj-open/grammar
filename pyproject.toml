@@ -1,0 +1,137 @@
+[project]
+name = 'r_open_grammar'
+version = '0.0.0'
+description = 'Methods to parse descriptions of formal languages'
+authors = [
+    { name = 'raj-open', email='raj-open@noreply.users.github.com' },
+]
+maintainers = [
+    { name = 'raj-open', email='raj-open@noreply.users.github.com' },
+]
+license = { file = 'LICENCE' }
+readme = 'README.md'
+requires-python = '>=3.10'
+keywords = [
+    'python',
+    'grammar',
+    'language',
+    'parser',
+    'lexer',
+]
+# cf. https://pypi.org/classifiers
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+# NOTE: cf. requirements.txt
+# NOTE do not use == in pyproject.toml only in requirements.txt
+dependencies = [
+    'pip>=23.1.2',
+    'wheel>=0.40.0',
+    #'hatchling>=1.17.0',
+    'setuptools>=67.8.0',
+    # misc
+    'typing>=3.7.4.3',
+    'pathlib>=1.0.1',
+    'importlib>=1.0.4',
+    'safetywrap>=1.5.0',
+    # config
+    'argparse>=1.4.0',
+    'lazy-load>=0.8.3',
+    'pyyaml>=6.0',
+    # data
+    'dataclasses>=0.6',
+    'pydantic>=1.10.8',
+    # parsing
+    'lark>=1.1.5',
+    'lark-parser[regex]>=0.12.0',
+    # maths
+    'numpy>=1.24.3',
+    # miscellaneous
+    'lorem>=0.1.1',
+]
+
+[build-system]
+requires = [ 'setuptools>=67.4.0' ]
+build-backend = 'setuptools.build_meta'
+
+[project.urls]
+homepage = 'https://github.com/raj-open/grammar'
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+r_open_grammar = [
+    'assets/*.lark',
+]
+
+[tool.setuptools.packages.find]
+where = [ 'src' ]
+include = [ 'r_open_grammar*' ]
+namespaces = true
+
+[project.optional-dependencies]
+test = [
+    'coverage[toml]>=7.2.6',
+    'pytest>=7.3.1',
+    'pytest-cov>=4.1.0',
+    'pytest-lazy-fixture>=0.6.3',
+    'pytest-order>=1.1.0',
+    'testfixtures>=7.1.0',
+]
+test-robot = [
+    'robotframework>=5.0.1', # NOTE: v6.0.2 causes conflicts!
+    'robotframework-tidy>=4.2.1',
+    'robotframework-datadriver>=1.7.0',
+    'robotframework-seleniumlibrary>=6.1.0',
+    'robotframework-webservice>=0.7.0',
+    # 'webdriver-manager>=3.8.6',
+    # 'rpaframework>=23.1.0',
+]
+dev = [
+    # NOTE: depends on name of project!
+    'r_open_grammar[test]',
+    'r_open_grammar[test-robot]',
+    # dev
+    'datamodel-code-generator>=0.19.0',
+    'openapi-generator-cli>=4.3.1',
+    'openapi-generator>=1.0.6',
+]
+
+[tool.pytest.ini_options]
+minversion = '7.2.1'
+testpaths = [
+    'tests',
+]
+python_files = [
+    '**/tests_*.py',
+]
+asyncio_mode = 'auto'
+filterwarnings = [
+    'error',
+    'ignore::UserWarning',
+    'ignore::DeprecationWarning',
+]
+# NOTE: appends (not prepends) flags:
+addopts = [
+    '--order-dependencies',
+    '--order-group-scope=module',
+    '--cache-clear',
+    '--verbose',
+    '--maxfail=1',
+    '-k test_',
+    # NOTE: will be ignored, if --cov not used (e.g. integration tests):
+    '--no-cov-on-fail',
+    '--cov-report=term',
+    '--cov-config=.coveragerc',
+    # NOTE: for development purposes only:
+    # '-s', # verbose print/err capturing disabled
+    # '--capture=tee-sys', # verbose print/err capturing enabled
+]
